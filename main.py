@@ -64,6 +64,6 @@ class Game():
 def main():
     theGame = Game(3)
     theGame.game_init()
-    #theGame2 = Game(6)
+    theGame2 = Game(6)
 
 main()
