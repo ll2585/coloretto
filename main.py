@@ -39,12 +39,13 @@ class Game():
         return cls.numPlayers
     
     myDeck = Deck()
-    print(get_numPlayers)
     myDeck.newDeck(get_numPlayers)
     print(myDeck.deck)
 
     
 
-#def main():
-theGame = Game(3)
-theGame2 = Game(6)
+def main():
+    theGame = Game(3)
+    theGame2 = Game(6)
+
+main()
