@@ -6,28 +6,38 @@ class Deck():
     #constructor
     def __init__(self):
         self.deck = []
+        self.startingColorList = []
 
     #assume numPlayer is either 3, 4, or 5
     #constraint checked in Game init
     def newDeck(self, numPlayer):
         self.deck =[]
         colorList = ['brown', 'yellow', 'green', 'orange', 'pink', 'gray', 'blue']
-        if (numPlayer==3):
-            Deck.makeNewDeck(self, colorList)
+        self.startingColorList = []
+        #edit this later if/when asking players for initial color
+        for i in range(numPlayer):
+            randomInt = randint(0, len(colorList)-1)
+            self.startingColorList.append(colorList[randomInt])
+            del colorList[randomInt]         
+        if (numPlayer!=3):
+            Deck.makeNewDeck(self, colorList, self.startingColorList)
         else:
             del colorList[randint(0,len(colorList)-1)]
-            Deck.makeNewDeck(self, colorList)
+            Deck.makeNewDeck(self, colorList, self.startingColorList)
         shuffle(self.deck)
         self.deck.insert(15, 'last round')
 
-    def makeNewDeck(self, colorList):
+    def makeNewDeck(self, colorList, startingColorList):
         for color in colorList:
             for num in range(9):
+                self.deck.append(color)
+        for color in startingColorList:
+            for num in range(8):
                 self.deck.append(color)
         for num in range(10):
             self.deck.append('+2')
         for num in range(3):
-            self.deck.append('joker')
+            self.deck.append('joker')    
 
 class Player():
 
@@ -58,7 +68,7 @@ class Game():
         playerList = []
         for num in range(self.numPlayers):
             playerList.append(Player())
-            playerList[num].addCard(myDeck.deck.pop())
+            playerList[num].addCard(myDeck.startingColorList.pop())
             print(playerList[num].hand)
 
 def main():
