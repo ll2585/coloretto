@@ -24,6 +24,20 @@ class Deck():
         for color in colorList:
             for num in range(9):
                 self.deck.append(color)
+        for num in range(10):
+            self.deck.append('+2')
+        for num in range(3):
+            self.deck.append('joker')
+
+class Player():
+
+    #constructor
+    def __init__(self):
+        self.hand = []
+
+    def addCard(self, card):
+        self.hand.append(card)
+
 
 class Game():
     
@@ -34,18 +48,22 @@ class Game():
         else:
             print("Must have between 3-5 players!")
     
-    @classmethod
-    def get_numPlayers(cls):
-        return cls.numPlayers
-    
-    myDeck = Deck()
-    myDeck.newDeck(get_numPlayers)
-    print(myDeck.deck)
+    def game_init(self):
+        #make and initialize Deck
+        myDeck = Deck()
+        myDeck.newDeck(self.numPlayers)
+        print(myDeck.deck)
 
-    
+        #create Players, give each one a starting card
+        playerList = []
+        for num in range(self.numPlayers):
+            playerList.append(Player())
+            playerList[num].addCard(myDeck.deck.pop())
+            print(playerList[num].hand)
 
 def main():
     theGame = Game(3)
+    theGame.game_init()
     theGame2 = Game(6)
 
 main()
