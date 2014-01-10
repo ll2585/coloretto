@@ -4,7 +4,7 @@ from random import randint
 class Deck():
 
     #constructor
-    def __init__(self):
+    #def __init__(self):
         self.deck = []
 
     #assume numPlayer is either 3, 4, or 5
