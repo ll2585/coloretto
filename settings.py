@@ -1,0 +1,11 @@
+MIN_PLAYERS = 2
+MAX_PLAYERS = 6
+NUM_PLAYERS_TO_REMOVE_ONE_COLOR = 3
+COLORS = ['brown', 'yellow', 'green', 'orange', 'pink', 'gray', 'blue']
+NUMBER_OF_CARDS_PER_COLOR = 9
+BONUS = "+2"
+NUMBER_OF_BONUSES = 10
+JOKER = "Joker"
+NUMBER_OF_JOKERS = 3
+LAST_ROUND_CARD_POSITION = 15
+LAST_ROUND_CARD = "last round"

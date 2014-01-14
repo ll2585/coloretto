@@ -2,6 +2,7 @@ from random import shuffle
 from random import randint
 import cmd
 import string, sys
+import settings as s
 
 class Deck():
 
@@ -113,38 +114,41 @@ class Pile():
         self.pile[:] = []
 
 class Game():
-    
     #constructor
     def __init__(self, numPlayers):
-        if 2 < numPlayers < 6:
+        if s.MIN_PLAYERS < numPlayers < s.MAX_PLAYERS:
             self.numPlayers = numPlayers
         else:
             print("Must have between 3-5 players!")
+            raise Exception
     
     def game_init(self):
-        #make and initialize Deck
-        myDeck = Deck()
-        myDeck.newDeck(self.numPlayers)
-        print((myDeck.deck))
+        self.makeDeck()
+        print(self.myDeck.deck)
 
         #create Players, give each one a starting card
         playerList = []
         pileList = []
         for num in range(self.numPlayers):
             playerList.append(Player())
-            playerList[num].addCard(myDeck.startingColorList.pop())
+            playerList[num].addCard(self.myDeck.startingColorList.pop())
             pileList.append(Pile())
             print((playerList[num].hand))
             print((pileList[num].pile))
         currentCard = Card('')
-        cli = CLI(myDeck, playerList, pileList, currentCard)
+        cli = CLI(self.myDeck, playerList, pileList, currentCard)
         #currentCard = 'brown'
         cli.cmdloop()
+
+    def makeDeck(self):
+        self.myDeck = Deck()
+        self.myDeck.newDeck(self.numPlayers)
         
 
 def main():
-    theGame = Game(3)
+    theGame = Game(numPlayers=3)
     theGame.game_init()
     #theGame2 = Game(6)
 
-main()
+if __name__ == '__main__':
+    main()
